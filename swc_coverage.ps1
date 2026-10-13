@@ -13,4 +13,4 @@ gcc -std=c99 -Ivendor/unity -c vendor/unity/unity.c -o build/unity.o
 gcc --coverage "build/$Module.o" "build/$test.o" build/unity.o -o "build/${test}_cov.exe"
 
 & ".\build\${test}_cov.exe"
-gcov -b -c -o build src/swc_overspeed.c
+gcov -b -c -o build "src/$Module.c"
