@@ -171,6 +171,39 @@ void test_PackThenUnpack_RoundTrip(void)
     TEST_ASSERT_EQUAL_HEX32(0x1ABCu, raw);
 }
 
+void test_Pack_InvalidArgs_ReturnsNotOk_FrameUnchanged(void)
+{
+    frame[0] = 0x55u;
+
+    TEST_ASSERT_EQUAL_UINT8(E_NOT_OK, Can_PackIntel(frame, 8u, 0u, 0u, 0u));    /* length = 0 */
+    TEST_ASSERT_EQUAL_UINT8(E_NOT_OK, Can_PackIntel(frame, 8u, 60u, 8u, 1u));   /* vượt frame */
+    TEST_ASSERT_EQUAL_HEX8(0x55u, frame[0]);
+}
+
+void test_Pack_DlcGreaterThan8_ReturnsNotOk(void)
+{
+    TEST_ASSERT_EQUAL_UINT8(E_NOT_OK, Can_PackIntel(frame, 9u, 0u, 8u, 1u));
+}
+
+void test_Unpack_DlcGreaterThan8_ReturnsNotOk(void)
+{
+    uint32_t raw = 77u;
+
+    TEST_ASSERT_EQUAL_UINT8(E_NOT_OK, Can_UnpackIntel(frame, 9u, 0u, 8u, &raw));
+    TEST_ASSERT_EQUAL_UINT32(77u, raw);                 /* output không bị ghi đè */
+}
+
+void test_PackThenUnpack_Length32_RoundTrip(void)
+{
+    uint32_t raw = 0u;
+
+    TEST_ASSERT_EQUAL_UINT8(E_OK, Can_PackIntel(frame, 8u, 8u, 32u, 0xDEADBEEFu));
+    TEST_ASSERT_EQUAL_UINT8(E_OK, Can_UnpackIntel(frame, 8u, 8u, 32u, &raw));
+    TEST_ASSERT_EQUAL_HEX32(0xDEADBEEFu, raw);
+}
+
+/* End of Test*/
+
 /* ---------- Runner ---------- */
 
 int main(void)
@@ -189,5 +222,9 @@ int main(void)
     RUN_TEST(test_Pack_MaxValueFor4Bits_Valid);
     RUN_TEST(test_Pack_NullFrame_ReturnsNotOk);
     RUN_TEST(test_PackThenUnpack_RoundTrip);
+    RUN_TEST(test_Pack_InvalidArgs_ReturnsNotOk_FrameUnchanged);
+    RUN_TEST(test_Pack_DlcGreaterThan8_ReturnsNotOk);
+    RUN_TEST(test_Unpack_DlcGreaterThan8_ReturnsNotOk);
+    RUN_TEST(test_PackThenUnpack_Length32_RoundTrip);
     return UNITY_END();
 }
