@@ -103,6 +103,15 @@ void test_EachCycle_WritesOutputExactlyOnce(void)
     TEST_ASSERT_EQUAL_UINT8(4u, Stub_WriteCnt);
 }
 
+void test_Speed_StaysAbove_ManyCycles_WarningStaysOn(void)
+{
+    RunCycles(150u, 10u);                /* vượt nhiều hơn 3 chu kỳ liên tiếp */
+    TEST_ASSERT_TRUE(Stub_Warn);
+
+    RunCycles(100u, 1u);                 /* một chu kỳ bình thường phải tắt ngay */
+    TEST_ASSERT_FALSE(Stub_Warn);
+}
+
 int main(void)
 {
     UNITY_BEGIN();
@@ -114,5 +123,6 @@ int main(void)
     RUN_TEST(test_RteReadFails_WarningOff_FailSafe);
     RUN_TEST(test_RteReadFails_ResetsDebounce);
     RUN_TEST(test_EachCycle_WritesOutputExactlyOnce);
+    RUN_TEST(test_Speed_StaysAbove_ManyCycles_WarningStaysOn);
     return UNITY_END();
 }
