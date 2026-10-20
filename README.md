@@ -1,7 +1,9 @@
-# C/C++ Study
+# C/C++ Project 
 
-Bài tập C/C++ phục vụ hướng AUTOSAR testing.
+ C/C++ for  AUTOSAR 
 
-- bai01_types.c: kiểu dữ liệu stdint
-- bai02_bitwise.c: thao tác bit (set/clear/toggle/check)
-- bai03_can_signal.c: đóng gói/giải nén signal CAN
+- bai01_types.c: type stdint
+- bai02_bitwise.c:  bitwise (set/clear/toggle/check)
+- bai03_can_signal.c: package and unpackage signal CAN
+- src : source code 
+- test : 
