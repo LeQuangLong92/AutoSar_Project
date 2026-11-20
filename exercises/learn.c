@@ -2,7 +2,6 @@
 #include <stdint.h>
 
 // 1. Định nghĩa địa chỉ thanh ghi cố định bằng "Hằng con trỏ" và "Volatile"
-// Hãy điền từ khóa hoặc cú pháp thích hợp vào chỗ trống (...)
 /* #define LED_REG   (*(volatile uint8_t * const)0x40001000)
 
 // Định nghĩa các mặt nạ bit (Mask)
