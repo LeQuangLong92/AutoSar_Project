@@ -49,7 +49,7 @@ $(TARGET_BIN): $(TARGET_ELF)
 # STEP 4: GENERATE WINDOWS EXECUTABLE (Direct binary copy from .elf image)
 $(TARGET_EXE): $(TARGET_ELF)
 	@echo "==== [STEP 4] Generating local Windows executable .exe ===="
-	@copy /Y can_demo\can_demo.elf can_demo\can_demo.exe >nul 2>&1 || cp $(TARGET_ELF) $(TARGET_EXE) >nul 2>&1 || exit 0
+	@copy /Y $(TARGET_ELF) $(TARGET_EXE) >nul 2>&1 || cp $(TARGET_ELF) $(TARGET_EXE) >nul 2>&1 || exit 0
 
 # TARGET TO RUN THE SIMULATION DIRECTLY
 run: all
@@ -59,7 +59,7 @@ run: all
 # TARGET TO CLEAN UP GENERATED OUTPUTS
 clean:
 	@echo "Cleaning up generated firmware outputs..."
-	del /Q can_demo\can_demo.elf 2>nul || exit 0
-	del /Q can_demo\can_demo.hex 2>nul || exit 0
-	del /Q can_demo\can_demo.bin 2>nul || exit 0
-	del /Q can_demo\can_demo.exe 2>nul || exit 0
+	del /Q $(TARGET_ELF) 2>nul || exit 0
+	del /Q $(TARGET_HEX) 2>nul || exit 0
+	del /Q $(TARGET_BIN) 2>nul || exit 0
+	del /Q $(TARGET_EXE) 2>nul || exit 0
