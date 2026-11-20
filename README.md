@@ -8,4 +8,7 @@
     + bai01_types.c: type stdint
     + bai02_bitwise.c:  bitwise (set/clear/toggle/check)
     + bai03_can_signal.c: package and unpackage signal CAN
-    + lear.c
+    + learn.c : For practical everyday
+- can_demo : full Can stack for transmission and reception simple CAN message 
+- MAKE file : Automatically compiler and linking 
+
