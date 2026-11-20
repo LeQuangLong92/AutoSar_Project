@@ -53,7 +53,8 @@ $(TARGET_EXE): $(TARGET_ELF)
 
 # TARGET TO RUN THE SIMULATION DIRECTLY
 run: all
-	.\$(TARGET_EXE)
+	@echo "==== [RUN] Executing the generated firmware simulation ===="
+	@$(TARGET_EXE)
 
 # TARGET TO CLEAN UP GENERATED OUTPUTS
 clean:
